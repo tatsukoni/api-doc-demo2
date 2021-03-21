@@ -1,0 +1,61 @@
+get:
+      tags:
+        - pet
+      summary: Finds Pets by status
+      description: Multiple status values can be provided with comma separated strings
+      operationId: findPetsByStatus
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        - name: status
+          in: query
+          description: Status values that need to be considered for filter
+          required: true
+          type: array
+          items:
+            type: string
+            enum:
+              - available
+              - pending
+              - sold
+            default: available
+          collectionFormat: multi
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Pet'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                    description: id
+                  status:
+                    type: string
+                    description: ステータス
+                  created:
+                    type: string
+                    format: date-time
+                    description: 生成日
+                required:
+                  - id
+                  - status
+                  - created
+              examples:
+                example-1:
+                  value:
+                    id: 0
+                    status: 健康
+                    created: '2019-08-24T14:15:22Z'
+        '400':
+          description: Invalid status value
+      security:
+        - petstore_auth:
+            - 'write:pets'
+            - 'read:pets'

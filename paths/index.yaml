@@ -1,0 +1,10 @@
+/pet/{petId}/uploadImage:
+  $ref: "./pet/_petId/uploadImage/index.yaml"
+/pet:
+  $ref: "./pet/index.yaml"
+/pet/findByStatus:
+  $ref: "./pet/findByStatus/index.yaml"
+/pet/{petId}:
+  $ref: "./pet/_petId/index.yaml"
+/pet/findByTags:
+  $ref: "./pet/findByTags/index.yaml"
