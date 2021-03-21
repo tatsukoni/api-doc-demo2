@@ -27,9 +27,11 @@ yq -y .paths.$expath $baseFile > tmp.yaml
 mkdir -p paths && mv tmp.yaml ./paths/tmp.yaml && cd paths
 arrPath=(${targetPath//// })
 refPath='.'
+# https://genzouw.com/entry/2019/12/17/120057/1831/
 for path in "${arrPath[@]}";
 do
     dir=$path
+    # http://www.koikikukan.com/archives/2019/07/01-235555.php
     if [[ $path =~ ^{(.*)}$ ]]; then
         dir='_'${BASH_REMATCH[1]}
     fi
@@ -39,6 +41,7 @@ done
 mkdir -p $refPath && rm -f "${refPath}/index.yaml" && mv tmp.yaml "${refPath}/index.yaml"
 
 # paths/index.yamlにAPIエンドポイント情報を書き込む (エンドポイント新規作成時のみ)
+# https://genzouw.com/entry/2020/02/10/090005/1922/
 if ! grep -q $targetPath index.yaml; then
     ref='$ref'
     cat <<EOF >> index.yaml
