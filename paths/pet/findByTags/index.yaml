@@ -49,4 +49,3 @@ get:
     - petstore_auth:
         - write:pets
         - read:pets
-  deprecated: true
